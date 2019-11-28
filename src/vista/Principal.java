@@ -23,7 +23,7 @@ public class Principal extends javax.swing.JFrame {
     ArrayList<Character> letrasNif = new ArrayList<>(); // ArrayList de letras para usar el metodo .contains() y facilitar la comprobacion de NIF
     ArrayList<Contactos> contacto = new ArrayList<>(); //Mi array de contactos
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    Estado e;
+    Estado e; //Enumerado
     int avance; //Variable para moverme por la agenda
     int count; // Variable que uso para, si hay contactos creados por codigo como los de prueba, 
     //comprobar si es la primera vez que se muestran,
@@ -76,6 +76,9 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void editarContacto() throws ParseException, NumberFormatException {
+        if(estaVacio()){
+            JOptionPane.showMessageDialog(null, "Alguno de los campos está vacio", "Aviso", JOptionPane.ERROR_MESSAGE);
+        }else{
         c = contacto.get(avance);
         c.setNombre(txtNombre.getText());
         c.setApellido1(txtApellido1.getText());
@@ -85,6 +88,7 @@ public class Principal extends javax.swing.JFrame {
         c.setTipo(cmboTipo.getSelectedItem().toString());
         contacto.set(avance, c);
         navegar();
+        }
     }
 
     private void toolTipGenerator() {
@@ -331,12 +335,21 @@ public class Principal extends javax.swing.JFrame {
         txtTelefono.setEditable(true);
         txtNacimiento.setEditable(true);
     }
-
-    private void anhadeLista() throws ParseException, NumberFormatException {
+    
+    private boolean estaVacio(){
         if (txtNif.getText().isEmpty() || txtNombre.getText().isEmpty()
                 || txtApellido1.getText().isEmpty() || txtApellido2.getText().isEmpty()
                 || txtTelefono.getText().isEmpty() || txtNacimiento.getText().isEmpty()
                 || cmboTipo.getSelectedIndex() == -1) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    private void anhadeLista() throws ParseException, NumberFormatException {
+        if (estaVacio()) {
             JOptionPane.showMessageDialog(null, "Alguno de los campos está vacio", "Aviso", JOptionPane.ERROR_MESSAGE);
 
         } else {
