@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -37,14 +38,15 @@ public class Principal extends javax.swing.JFrame {
         sdf.setLenient(false);
         count = 0;
         //Contactos de prueba
-        /*Contactos c1 = new Contactos("12345678A", "Pedro", "Pedrin", "Pedron", 981137131, new Date(98, 8, 7), "Amigo");/*
-        Contactos c2 = new Contactos("12345678B", "Adrian", "Rodrigo", "Pelotas", 981137131, new Date(99, 2, 7), "Enemigo");
-        Contactos c3 = new Contactos("12345678C", "Pichu", "Licha", "Castro", 981137131, new Date(97, 0, 7), "Amigo");
-        Contactos c4 = new Contactos("12345678D", "Me", "Cagoen", "Laputa", 981137131, new Date(90, 4, 7), "Trabajo");
+        /*Contactos c1 = new Contactos("58756324H", "Pedro", "Pedrin", "Pedron", 981137131, new Date(98, 8, 7), "Amigo");
+        Contactos c2 = new Contactos("10344702S", "Adrian", "Rodrigo", "Pelotas", 981137131, new Date(99, 2, 7), "Enemigo");
+        Contactos c3 = new Contactos("68765451M", "Pichu", "Licha", "Castro", 981137131, new Date(97, 0, 7), "Amigo");
+        Contactos c4 = new Contactos("98654598P", "Me", "Cagoen", "Laputa", 981137131, new Date(90, 4, 7), "Trabajo");
         contacto.add(c1);
         contacto.add(c2);
-        contacto.add(c3);*/
-        //contacto.add(c1);
+        contacto.add(c3);
+        
+        contacto.add(c4);*/
 
         if (contacto.isEmpty()) {
             e = Estado.ANHADIENDO;
