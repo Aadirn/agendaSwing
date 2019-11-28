@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -129,6 +130,7 @@ public class Principal extends javax.swing.JFrame {
         btnAnadir.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnCargar.setEnabled(false);
+        btnAutomatico.setEnabled(false);
 
         txtNif.setEditable(false);
         txtNombre.setEditable(false);
@@ -160,7 +162,7 @@ public class Principal extends javax.swing.JFrame {
                 case 1:
                     try {
                         cargarDatos();
-                    } catch (IOException | ClassNotFoundException ex) {
+                    } catch (IOException ex) {
                         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     return;
@@ -182,6 +184,7 @@ public class Principal extends javax.swing.JFrame {
             btnGuardar.setEnabled(false);
             btnCargar.setEnabled(true);
             cmboTipo.setEnabled(true);
+            btnAutomatico.setEnabled(true);
 
             txtNif.setText("");
             txtNombre.setText("");
@@ -213,6 +216,7 @@ public class Principal extends javax.swing.JFrame {
             cmboTipo.setEnabled(true);
             btnGuardar.setEnabled(false);
             btnCargar.setEnabled(false);
+            btnAutomatico.setEnabled(true);
 
             txtNif.setText("");
             txtNombre.setText("");
@@ -254,6 +258,7 @@ public class Principal extends javax.swing.JFrame {
         btnAnadir.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnCargar.setEnabled(true);
+        btnAutomatico.setEnabled(false);
 
         txtNif.setEnabled(true);
         txtNif.setEditable(false);
@@ -316,6 +321,7 @@ public class Principal extends javax.swing.JFrame {
         btnUltimo.setEnabled(false);
         btnAnadir.setEnabled(false);
         cmboTipo.setEnabled(true);
+        btnAutomatico.setEnabled(false);
 
         txtNif.setEnabled(false);
         txtNif.setEditable(false);
@@ -357,7 +363,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }
 
-    private boolean cargarDatos() throws IOException, ClassNotFoundException {
+    private boolean cargarDatos() throws IOException  {
         count = 0;
         File file;
         int respuesta = fcGuardarCargar.showOpenDialog(null);
@@ -369,6 +375,8 @@ public class Principal extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(null, "Error al cargar fichero", "Error", JOptionPane.ERROR_MESSAGE);
             } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(null, "Error al cargar fichero", "Error", JOptionPane.ERROR_MESSAGE);
+            }catch(StreamCorruptedException ex){
                 JOptionPane.showMessageDialog(null, "Error al cargar fichero", "Error", JOptionPane.ERROR_MESSAGE);
             }
             e = Estado.NAVEGANDO;
@@ -843,7 +851,7 @@ public class Principal extends javax.swing.JFrame {
                     try {
                         guardarDatos();
                         cargarDatos();
-                    } catch (IOException | ClassNotFoundException ex) {
+                    } catch (IOException ex) {
                         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -853,8 +861,6 @@ public class Principal extends javax.swing.JFrame {
                         cargarDatos();
                     } catch (IOException ex) {
                         Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        JOptionPane.showMessageDialog(null, "Error al cargar fichero", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 break;
@@ -864,7 +870,7 @@ public class Principal extends javax.swing.JFrame {
             try {
                 try {
                     cargarDatos();
-                } catch (FileNotFoundException | ClassNotFoundException ex) {
+                } catch (FileNotFoundException ex) {
                     JOptionPane.showMessageDialog(null, "Error al cargar fichero", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (IOException ex) {
@@ -874,6 +880,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCargarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(contacto.isEmpty()){
+            
+        }else{
+        
         String[] s = {"Guardar", "Salir Sin Guardar"};
 
         int respuesta = JOptionPane.showOptionDialog(null, "Vas a salir sin guardar, ¿Estás seguro?", "Aviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, s, s[0]);
@@ -894,6 +904,7 @@ public class Principal extends javax.swing.JFrame {
             break;
             case 1:
                 break;
+        }
         }
     }//GEN-LAST:event_formWindowClosing
 
